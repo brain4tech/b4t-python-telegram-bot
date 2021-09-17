@@ -4,6 +4,10 @@
 import json
 import requests
 
+import sys, os
+dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir)
+
 from classes.commands import BotCommand, BotCommandList
 from classes.keyboards import InlineButton, KeyboardButton, ButtonList
 from classes.media import Photo, Audio, Video, Document

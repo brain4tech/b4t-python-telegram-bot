@@ -1,5 +1,5 @@
 # Brain4Tech Python Telegram Bot
-*A simple and lightwheight Python Telegram Bot with a small range of functionalities using the [Telegram Bot API](https://core.telegram.org/bots/api)*
+*A simple and lightweight Python Telegram Bot with a small range of functionalities using the [Telegram Bot API](https://core.telegram.org/bots/api)*
 
 **Requirements:**
 

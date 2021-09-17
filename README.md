@@ -62,7 +62,7 @@ Check the Update-class in classes/updates.py for more. It's pretty self explaini
  - the codebase is still in development. Bugs can occur, features are not fully implemented, and so on..
  - this repository is NOT a pip-package (yet). You need to download this repository as a *.zip-file (and extract it afterwards) in order to use it in your own project
  - I added a directory called "tests" with a template-script. You can use that to get started as well.
- - Mistakes and Bugs *can* occur (lol)
+ - Mistakes and Bugs ~~*can*~~ *will* occur! If you found one, please open an issue :)
  - This code is **FREE** to use! YEYY!
 
 
@@ -75,4 +75,4 @@ Check the Update-class in classes/updates.py for more. It's pretty self explaini
  - English is obviously **not** my first language
 
 
-Feel free to make a pull request and help making this repository beginner- and user-friendly!
+Feel free to make a pull request and help me making this repository beginner- and user-friendly!

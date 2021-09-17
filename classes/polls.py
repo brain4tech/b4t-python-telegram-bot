@@ -1,6 +1,6 @@
 # classes for polls
 
-from messages import User
+from classes.messages import User
 
 class Poll:
     def __init__(self, data_: dict):

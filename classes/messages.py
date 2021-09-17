@@ -1,6 +1,6 @@
 # classes for messages in updates
 
-from media import Photo, Video, Audio, Document
+from classes.media import Photo, Video, Audio, Document
 
 class Message:
     def __init__(self, data_: dict):

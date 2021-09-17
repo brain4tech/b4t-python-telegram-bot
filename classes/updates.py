@@ -1,8 +1,8 @@
 # general class for receiving updates
 
-from messages import Message, ChannelPost, Message, MessageEntity
-from polls import Poll, PollAnswer
-from misc import CallbackQuery
+from classes.messages import Message, ChannelPost, Message, MessageEntity
+from classes.polls import Poll, PollAnswer
+from classes.misc import CallbackQuery
 
 class Update:
     def __init__(self, data_: dict):

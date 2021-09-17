@@ -1,6 +1,6 @@
 # miscellanious classes
 
-from messages import Message, User
+from classes.messages import Message, User
 
 class CallbackQuery:
     def __init__(self, data_: dict):

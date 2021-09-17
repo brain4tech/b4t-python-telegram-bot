@@ -27,6 +27,7 @@
  - forward messages
  - improve "single-chat mode"
  - add time delay between requests and use timeout features
+ - propper documentation
 
 
 **How it works:**

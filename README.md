@@ -23,6 +23,7 @@
 
  - download images, audio, video and documents
  - add more media and interactable features (like voice, dices, media groups, locations and contacts)
+ - proper method for turning keyboards to a json-string
  - get chat information and set chat attributes (like chat photo and description)
  - forward messages
  - improve "single-chat mode"

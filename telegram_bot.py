@@ -55,17 +55,11 @@ class TelegramBot:
                 print (f"An error occurred: {repr(e)}")
 
     def sendMessage(self, chat_id, message, keyboard:dict = None):
-        if not keyboard:
-            reply_markup = json.dumps({'remove_keyboard': True})
-        else:
-            keyboard['resize_keyboard'] = True
-            keyboard['one_time_keyboard'] = True
-            reply_markup = json.dumps(keyboard)
-        
+
         data = {
             'chat_id': chat_id,
             'text': message,
-            'reply_markup': reply_markup
+            'reply_markup': json.dumps(keyboard if keyboard else {'remove_keyboard': True})
             }   
 
         requests.post(self.__base_url + "/sendMessage", data=data)
@@ -201,23 +195,3 @@ class TelegramBot:
     
     def getBotCommands(self):
         return requests.get(self.__base_url + "/getMyCommands").json()
-
-    @staticmethod
-    def keyboardListToKeyboard (keyboard_list, special_button = False, column_count: int = 3):
-        if isinstance(keyboard_list, ButtonList):
-            button_send = []
-            button_row = []
-
-            for item in keyboard_list.list:
-                button_row.append(item.toDict())
-
-                if len(button_row) >= column_count or item == keyboard_list.list[-1]:
-                    button_send.append(button_row[:])
-                    button_row.clear()
-
-            if special_button and isinstance(special_button, InlineButton or KeyboardButton):
-                button_send.append([special_button.toDict()])
-
-            return button_send
-
-        return False

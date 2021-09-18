@@ -24,30 +24,38 @@ class KeyboardButton:
 
 
 class ButtonList:
-    def __init__(self, instance_type: type, button_list: list = []):
+    def __init__(self, button_type_: type, button_list_: list = []):
 
-        if instance_type == InlineButton or instance_type == KeyboardButton:
+        self.button_type = None
+        self.button_type_str = ""
+        self.__button_list = []
 
-            self.list = []
-
-            if button_list:
-                for element in button_list:
-                    if isinstance(element, instance_type):
-                        self.list.append(element)
-        
+        if button_type_ == InlineButton:
+            self.button_type = button_type_
+            self.button_type_str = "inline"
+        elif button_type_ == KeyboardButton:
+            self.button_type = button_type_
+            self.button_type_str = "keyboard"
         else:
-            raise TypeError("instance_type is not type InlineButton or keyboardButton")
-    
+            raise TypeError("given button_type is not type InlineButton or KeyboardButton")
+
+        if button_list_:
+            for element in button_list_:
+                if isinstance(element, self.button_type):
+                    self.button_list.append(element)
+
+
     def __str__(self):
         return str(self.toDict())
 
     def toDict(self):
         return [button.toDict() for button in self.list]
 
-    def addCommand(self, button_: InlineButton):
-        self.list.append(button_)
+    def addCommand(self, button_):
+        if isinstance(button_, self.button_type):
+            self.button_list.append(button_)
     
-    def bulkAddCommands (self, command_list: list):
-        for element in command_list:
-            if isinstance(element, InlineButton):
-                self.list.append(element)
+    def bulkAddCommands (self, button_list: list):
+        for element in button_list:
+            if isinstance(element, self.button_type):
+                self.button_list.append(element)

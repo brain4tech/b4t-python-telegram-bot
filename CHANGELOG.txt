@@ -1,0 +1,4 @@
+--- Brain4Tech Python Telegram Bot - Changelog ---
+
+Version 0.0.1 (20.09.2021)
+# first release

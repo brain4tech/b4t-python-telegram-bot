@@ -9,12 +9,13 @@ import requests
 
 
 class TelegramBot:
-    def __init__(self, bot_token_, single_chat_mode_=False):
+    def __init__(self, bot_token_, return_on_update_only: bool = True, single_chat_mode_=False):
         self.__token = bot_token_
 
         # if bot should only work for one specific chat (other chats will be ignored).
         # single_chat_mode_ needs to be the correct chat-id in order for this functionality to be activated
         self.__single_chat_mode = int(single_chat_mode_)
+        self.__return_on_update_only = bool(return_on_update_only)
 
         self.__base_url = f"https://api.telegram.org/bot{self.__token}"
         self.__offset = 0
@@ -47,6 +48,9 @@ class TelegramBot:
 
                     else:
                         return result
+                
+                elif self.__return_on_update_only:
+                    return result
 
             except Exception as e:
                 print(f"An error occurred: {repr(e)}")
@@ -207,3 +211,7 @@ class TelegramBot:
         }
 
         requests.post(self.__base_url + "/unbanChatMember", data=data)
+    
+    def kickChatMember (self, chat_id, user_id):
+        self.banChatMember(chat_id, user_id)
+        self.unbanChatMember(chat_id, user_id)

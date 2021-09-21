@@ -2,16 +2,25 @@ from setuptools import setup, find_packages
 import subprocess
 import os
 
-cf_remote_version = (
-    subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE)
-    .stdout.decode("utf-8")
-    .strip()
-)
-assert "." in cf_remote_version
+#change value in case try-catch is not working!
+cf_remote_version = "1.0.0"
 
-assert os.path.isfile("cf_remote/version.py")
-with open("cf_remote/VERSION", "w", encoding="utf-8") as fh:
-    fh.write(f"{cf_remote_version}\n")
+#read current version from git-repo release-tag
+try:
+    cf_remote_version = (
+        subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE)
+        .stdout.decode("utf-8")
+        .strip()
+    )
+    assert "." in cf_remote_version
+
+    assert os.path.isfile("cf_remote/version.py")
+
+    with open("cf_remote/VERSION", "w", encoding="utf-8") as fh:
+        fh.write(f"{cf_remote_version}\n")
+
+except Exception:
+    pass
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()

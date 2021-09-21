@@ -3,6 +3,7 @@
 
 from .updates import Update
 from .commands import BotCommandList
+from .chatmembers import ChatMember
 
 import json
 import requests
@@ -215,3 +216,14 @@ class TelegramBot:
     def kickChatMember (self, chat_id, user_id):
         self.banChatMember(chat_id, user_id)
         self.unbanChatMember(chat_id, user_id)
+    
+    def getChatAdministrators(self, chat_id):
+
+        data = {
+            'chat_id': chat_id,
+        }
+
+        response = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
+
+        if response['ok'] and response['result']:
+            return [ChatMember(member) for member in response['result']]

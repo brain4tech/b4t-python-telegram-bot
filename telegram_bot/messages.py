@@ -50,6 +50,12 @@ class User:
         self.first_name = data_['first_name']
         self.last_name = data_['last_name'] if 'last_name' in data_ else ""
         self.username = data_['username'] if 'username' in data_ else ""
+    
+    def __str__(self):
+        return str(self.toDict())
+    
+    def toDict(self):
+        return self.__dict__
 
 
 class Chat:

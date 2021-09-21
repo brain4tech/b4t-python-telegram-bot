@@ -9,7 +9,7 @@ class Message:
         self.sender = User(data_['from'])
         self.chat = Chat(data_['chat'])
         self.date = data_['date']
-        self.text = data_['text']
+        self.text = data_['text'] if 'text' in data_ else None
         self.entities = MessageEntityList(
             data_['entities']) if 'entities' in data_ else None
         self.photo = [Photo(photo) for photo in data_[

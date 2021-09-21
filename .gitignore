@@ -3,3 +3,6 @@ tests
 
 # ignore pychache
 __pycache__
+
+# ignore development-builds
+b4t_python_telegram_bot.egg-info

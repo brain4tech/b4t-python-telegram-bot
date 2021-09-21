@@ -190,3 +190,20 @@ class TelegramBot:
 
     def getBotCommands(self):
         return requests.get(self.__base_url + "/getMyCommands").json()
+    
+    def banChatMember(self, chat_id, user_id):
+        data = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+
+        requests.post(self.__base_url + "/banChatMember", data=data)
+
+    def unbanChatMember(self, chat_id, user_id):
+        data = {
+            'chat_id': chat_id,
+            'user_id': user_id,
+            'only_if_banned': True
+        }
+
+        requests.post(self.__base_url + "/unbanChatMember", data=data)

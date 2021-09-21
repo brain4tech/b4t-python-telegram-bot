@@ -49,7 +49,7 @@ class TelegramBot:
                     else:
                         return result
                 
-                elif self.__return_on_update_only:
+                elif not self.__return_on_update_only:
                     return result
 
             except Exception as e:

@@ -3,7 +3,7 @@ import subprocess
 import os
 
 #change value in case try-catch is not working!
-cf_remote_version = "1.0.0"
+cf_remote_version = "1.1.0"
 
 #read current version from git-repo release-tag
 try:

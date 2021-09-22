@@ -13,7 +13,7 @@ classifiers = [
 
 setup(
     name='b4t-python-telegram-bot',
-    version='1.1.0',
+    version='1.1.1',
     description='Simple and lightweight Telegram Bot',
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -1,8 +1,8 @@
 # general class for receiving updates
 
 from .messages import Message, ChannelPost, Message, MessageEntity
-from .polls import Poll, PollAnswer
 from .misc import CallbackQuery
+from .polls import Poll, PollAnswer
 
 
 class Update:

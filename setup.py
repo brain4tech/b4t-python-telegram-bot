@@ -1,29 +1,7 @@
 from setuptools import setup, find_packages
-import subprocess
-import os
 
-#change value in case try-catch is not working!
-cf_remote_version = "1.1.0"
-
-#read current version from git-repo release-tag
-try:
-    cf_remote_version = (
-        subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE)
-        .stdout.decode("utf-8")
-        .strip()
-    )
-    assert "." in cf_remote_version
-
-    assert os.path.isfile("cf_remote/version.py")
-
-    with open("cf_remote/VERSION", "w", encoding="utf-8") as fh:
-        fh.write(f"{cf_remote_version}\n")
-
-except Exception:
-    pass
-
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+with open("README.md", "r", encoding="utf-8") as file:
+    long_description = file.read()
 
 classifiers = [
     'Development Status :: 5 - Production/Stable',
@@ -35,7 +13,7 @@ classifiers = [
 
 setup(
     name='b4t-python-telegram-bot',
-    version=cf_remote_version,
+    version='1.1.0',
     description='Simple and lightweight Telegram Bot',
     long_description=long_description,
     long_description_content_type="text/markdown",

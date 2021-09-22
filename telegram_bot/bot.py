@@ -38,20 +38,20 @@ class TelegramBot:
                     if self.__single_chat_mode:
                         try:
                             if result.isMessage() and result.message.chat.id == self.__single_chat_mode:
-                                return result
+                                return result, update
 
                             if result.isCallback() and result.callback.message.chat.id == self.__single_chat_mode:
-                                return result
+                                return result, update
 
                         except Exception as e:
                             print(
                                 f"An error occurred while checking conditions: {e}")
 
                     else:
-                        return result
+                        return result, update
                 
                 elif not self.__return_on_update_only:
-                    return result
+                    return result, update
 
             except Exception as e:
                 print(f"An error occurred: {repr(e)}")

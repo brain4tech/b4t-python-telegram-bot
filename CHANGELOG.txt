@@ -1,5 +1,11 @@
 --- Brain4Tech Python Telegram Bot - Changelog ---
 
+Version 1.1.2 (22.09.2021)
+- new, second return value vor poll(): formatted value & response of requests.get()
+
+Version 1.1.1 (22.09.2021)
+- fix for pypi
+
 Version 1.1.0 (22.09.2021)
 - new bot-mode: return_on_update_only (whether poll() should only return a value when there is a update or after every request)
 - ban, unban or kick members from any group-like chat (bot must be administrator)

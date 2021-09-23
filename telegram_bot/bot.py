@@ -11,7 +11,7 @@ import requests
 
 class TelegramBot:
     def __init__(self, bot_token_, return_on_update_only: bool = True, single_chat_mode_=False):
-        self.__token = bot_token_
+        self.__token = str(bot_token_).strip()
 
         # if bot should only work for one specific chat (other chats will be ignored).
         # single_chat_mode_ needs to be the correct chat-id in order for this functionality to be activated

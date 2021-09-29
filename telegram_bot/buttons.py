@@ -1,10 +1,13 @@
 # classes for inline and reply keyboards
 
 class InlineButton:
-    def __init__(self, text_, callback_data_, url_=""):
+    def __init__(self, text_, callback_data_ = "", url_=""):
         self.text = text_
         self.callback_data = callback_data_
         self.url = url_
+
+        if not self.callback_data and not self.url:
+            raise TypeError("Either callback_data or url must be given")
 
     def __str__(self):
         return str(self.toDict())

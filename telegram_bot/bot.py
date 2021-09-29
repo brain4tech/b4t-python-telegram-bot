@@ -16,6 +16,8 @@ class TelegramBot:
         
         self.__token = str(bot_token_).strip().replace(' ', '')
 
+        # check with /me if token is valid
+
         if not self.__token:
             raise ValueError("Given token is not valid.")
 
@@ -219,19 +221,17 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/banChatMember", data=data).json()
 
-    def unbanChatMember(self, chat_id, user_id):
+    def unbanChatMember(self, chat_id, user_id, only_if_banned = True):
         data = {
             'chat_id': chat_id,
             'user_id': user_id,
-            'only_if_banned': True
+            'only_if_banned': bool(only_if_banned)
         }
 
         return requests.post(self.__base_url + "/unbanChatMember", data=data).json()
     
     def kickChatMember (self, chat_id, user_id):
-        reponse_ban = self.banChatMember(chat_id, user_id)
-        response_unban = self.unbanChatMember(chat_id, user_id)
-        return reponse_ban, response_unban
+        return self.unbanChatMember(chat_id, user_id, False)
     
     def getChatMember (self, chat_id, user_id):
         data = {

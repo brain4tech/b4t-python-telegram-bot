@@ -244,7 +244,7 @@ class TelegramBot:
             'user_id': user_id
         }
 
-        response = requests.post(self.__base_url + "/getChatMember", data=data)
+        response = requests.post(self.__base_url + "/getChatMember", data=data).json()
         try:
             if response['ok'] and response['result']:
                 return ChatMember(response['result'])
@@ -260,7 +260,7 @@ class TelegramBot:
             'chat_id': chat_id
         }
 
-        response = requests.post(self.__base_url + "/getChatAdministrators", data=data)
+        response = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
 
         try:
             if response['ok'] and response['result']:

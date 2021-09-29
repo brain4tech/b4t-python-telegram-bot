@@ -29,6 +29,10 @@ class TelegramBot:
         self.__base_url = f"https://api.telegram.org/bot{self.__token}"
         self.__offset = 0
 
+        response = requests.get(self.__base_url + "/getMe").json()
+        if not response['ok']:
+            raise ValueError(f"Passed token not accepted by Telegram. Please check and try again: {response['description']}")
+
     def poll(self):
         while True:
             try:

@@ -67,7 +67,7 @@ class TelegramBot:
         data = {
             'chat_id': chat_id,
             'text': message,
-            'reply_markup': json.dumps(keyboard if keyboard else {'remove_keyboard': True})
+            'reply_markup': json.dumps(keyboard) if keyboard else ""
         }
 
         return requests.post(self.__base_url + "/sendMessage", data=data).json()
@@ -156,22 +156,30 @@ class TelegramBot:
     def increaseOffset(self):
         self.__offset += 1
 
-    def editMessage(self, chat_id, message_id, text, inline_keyboard: dict = None):
-        if not inline_keyboard:
-            reply_markup = json.dumps({'remove_keyboard': True})
-        else:
-            inline_keyboard['resize_keyboard'] = True
-            inline_keyboard['one_time_keyboard'] = True
-            reply_markup = json.dumps(inline_keyboard)
+    def editMessage(self, chat_id, message_id, text, keyboard: dict = None):
+
+        # you can only edit messages which do not have a reply-keyboard
 
         data = {
             'chat_id': chat_id,
             'message_id': message_id,
             'text': text,
-            'reply_markup': reply_markup
+            'reply_markup': json.dumps(keyboard) if keyboard else ""
+        }
+    
+        return requests.post(self.__base_url + "/editMessageText", data=data).json()
+    
+    def editMessageInlineKeyboard(self, chat_id, message_id, keyboard: dict):
+
+        # you can only edit messages which do not have a reply-keyboard
+
+        data = {
+            'chat_id': chat_id,
+            'message_id': message_id,
+            'reply_markup': json.dumps(keyboard)
         }
 
-        return requests.post(self.__base_url + "/editMessageText", data=data).json()
+        return requests.post(self.__base_url + "/editMessageReplyMarkup", data=data).json()
 
     def deleteMessage(self, chat_id, message_id):
         data = {

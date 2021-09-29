@@ -1,7 +1,16 @@
 --- Brain4Tech Python Telegram Bot - Changelog ---
 
+Version 1.2.0 (29.09.2021)
+- newlines and spaces are removed from bot_token
+- if passed bot-token is not accepted by the Telegram API the script raises a ValueError
+- new method: getChatMember() gets chat member of group by chat_id and user_id (returns instance of ChatMember)
+- correct editing of text messages (edit text and inline-keyboard)
+- better kicking from groups and channels
+- requests.post()s and -get()s now return original instance of requests.response() instead of a dict
+- some potential bugfixing
+
 Version 1.1.2 (22.09.2021)
-- new, second return value vor poll(): formatted value & response of requests.get()
+- new, second return value for poll(): formatted value & response of requests.get()
 
 Version 1.1.1 (22.09.2021)
 - fix for pypi

@@ -1,5 +1,8 @@
 --- Brain4Tech Python Telegram Bot - Changelog ---
 
+Version 1.2.1 (29.09.2021)
+- might have removed to many .json()s -.-
+
 Version 1.2.0 (29.09.2021)
 - newlines and spaces are removed from bot_token
 - if passed bot-token is not accepted by the Telegram API the script raises a ValueError

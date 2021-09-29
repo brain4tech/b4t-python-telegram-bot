@@ -225,13 +225,33 @@ class TelegramBot:
         response_unban = self.unbanChatMember(chat_id, user_id)
         return reponse_ban, response_unban
     
+    def getChatMember (self, chat_id, user_id):
+        data = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+
+        response = requests.post(self.__base_url + "/getChatMember", data=data).json()
+        try:
+            if response['ok'] and response['result']:
+                return ChatMember(response['result'])
+            else:
+                return None
+        except Exception:
+            return None
+
+    
     def getChatAdministrators(self, chat_id):
 
         data = {
-            'chat_id': chat_id,
+            'chat_id': chat_id
         }
 
         response = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
 
-        if response['ok'] and response['result']:
-            return [ChatMember(member) for member in response['result']]
+        try:
+            if response['ok'] and response['result']:
+                return [ChatMember(member) for member in response['result']]
+        except Exception:
+            return None
+

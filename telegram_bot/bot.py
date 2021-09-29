@@ -36,8 +36,7 @@ class TelegramBot:
     def poll(self):
         while True:
             try:
-                update = requests.get(
-                    self.__base_url + "/getUpdates", data={'offset': self.__offset}).json()
+                update = requests.get(self.__base_url + "/getUpdates", data={'offset': self.__offset}).json()
 
                 if update['ok'] and update['result']:
                     result = Update(update['result'][0])
@@ -76,7 +75,7 @@ class TelegramBot:
             'reply_markup': json.dumps(keyboard) if keyboard else ""
         }
 
-        return requests.post(self.__base_url + "/sendMessage", data=data).json()
+        return requests.post(self.__base_url + "/sendMessage", data=data)
 
     def sendPhoto(self, chat_id, photo_path, caption=""):
 
@@ -87,7 +86,7 @@ class TelegramBot:
 
         photo = {'photo': open(photo_path, 'rb')}
 
-        return requests.post(self.__base_url + "/sendPhoto", data=data, files=photo).json()
+        return requests.post(self.__base_url + "/sendPhoto", data=data, files=photo)
 
     def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path=""):
         data = {
@@ -103,7 +102,7 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendVideo", data=data, files=media).json()
+        return requests.post(self.__base_url + "/sendVideo", data=data, files=media)
 
     def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path=""):
         data = {
@@ -119,7 +118,7 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendAudio", data=data, files=media).json()
+        return requests.post(self.__base_url + "/sendAudio", data=data, files=media)
 
     def sendDocument(self, chat_id, document_path, caption="", thumbnail_path=""):
         data = {
@@ -132,7 +131,7 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendDocument", data=data, files=media).json()
+        return requests.post(self.__base_url + "/sendDocument", data=data, files=media)
 
     def sendPoll(self, chat_id: int, question: str, options: list, is_anonymous: bool = True, poll_type: str = "regular",
                  multiple_answers: bool = False, correct_option: int = 0, explanation: str = "", open_period: int = 0, close_date: int = None):
@@ -153,7 +152,7 @@ class TelegramBot:
         if open_period > 5:
             data['open_period'] = open_period
 
-        return requests.post(self.__base_url + "/sendPoll", data=data).json()
+        return requests.post(self.__base_url + "/sendPoll", data=data)
 
     def __setOffset(self, offset: int):
         self.__offset = offset
@@ -173,7 +172,7 @@ class TelegramBot:
             'reply_markup': json.dumps(keyboard) if keyboard else ""
         }
     
-        return requests.post(self.__base_url + "/editMessageText", data=data).json()
+        return requests.post(self.__base_url + "/editMessageText", data=data)
     
     def editMessageInlineKeyboard(self, chat_id, message_id, keyboard: dict):
 
@@ -185,7 +184,7 @@ class TelegramBot:
             'reply_markup': json.dumps(keyboard)
         }
 
-        return requests.post(self.__base_url + "/editMessageReplyMarkup", data=data).json()
+        return requests.post(self.__base_url + "/editMessageReplyMarkup", data=data)
 
     def deleteMessage(self, chat_id, message_id):
         data = {
@@ -193,7 +192,7 @@ class TelegramBot:
             'message_id': message_id
         }
 
-        return requests.post(self.__base_url + "/deleteMessage", data=data).json()
+        return requests.post(self.__base_url + "/deleteMessage", data=data)
 
     def answerCallbackQuery(self, query_id, text):
         data = {
@@ -201,21 +200,23 @@ class TelegramBot:
             'text': text
         }
 
-        return requests.post(self.__base_url + "/answerCallbackQuery", data=data).json()
+        return requests.post(self.__base_url + "/answerCallbackQuery", data=data)
 
     def setBotCommands(self, command_list: BotCommandList):
         if isinstance(command_list, BotCommandList):
             data = {'commands': json.dumps(command_list.toDict())}
 
-            return requests.post(self.__base_url + "/setMyCommands", data=data).json()
+            return requests.post(self.__base_url + "/setMyCommands", data=data)
         else:
             raise TypeError(f"command_list ist type {type(command_list)} and not BotCommmandList")
 
     def deleteBotCommands(self):
-        return requests.post(self.__base_url + "/deleteMyCommands").json()
+        return requests.post(self.__base_url + "/deleteMyCommands")
 
     def getBotCommands(self):
         return requests.get(self.__base_url + "/getMyCommands").json()
+
+        # convert json to package-own command-classes?
     
     def banChatMember(self, chat_id, user_id):
         data = {
@@ -223,7 +224,7 @@ class TelegramBot:
             'user_id': user_id
         }
 
-        return requests.post(self.__base_url + "/banChatMember", data=data).json()
+        return requests.post(self.__base_url + "/banChatMember", data=data)
 
     def unbanChatMember(self, chat_id, user_id, only_if_banned = True):
         data = {
@@ -232,7 +233,7 @@ class TelegramBot:
             'only_if_banned': bool(only_if_banned)
         }
 
-        return requests.post(self.__base_url + "/unbanChatMember", data=data).json()
+        return requests.post(self.__base_url + "/unbanChatMember", data=data)
     
     def kickChatMember (self, chat_id, user_id):
         return self.unbanChatMember(chat_id, user_id, False)
@@ -243,7 +244,7 @@ class TelegramBot:
             'user_id': user_id
         }
 
-        response = requests.post(self.__base_url + "/getChatMember", data=data).json()
+        response = requests.post(self.__base_url + "/getChatMember", data=data)
         try:
             if response['ok'] and response['result']:
                 return ChatMember(response['result'])
@@ -259,7 +260,7 @@ class TelegramBot:
             'chat_id': chat_id
         }
 
-        response = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
+        response = requests.post(self.__base_url + "/getChatAdministrators", data=data)
 
         try:
             if response['ok'] and response['result']:

@@ -21,18 +21,19 @@ Installation with pip: `pip install b4t-python-telegram-bot`
  - "return-on-update-only mode": bot only returns a value when it receives a valid update
  - new chat members
  - ban, unban or kick members from group-like chats
+ - get information about chat members
+ - edit messages
 
 
 **Future plans:**
 
  - download images, audio, video and documents
  - add more media and interactable features (like voice, dices, media groups, locations and contacts)
- - proper method for turning keyboards to a json-string
  - get chat information and set chat attributes (like chat photo and description)
  - forward messages
  - improve "single-chat mode"
  - add time delay between requests and use timeout features
- - propper documentation
+ - documentation
 
 
 **How it works:**

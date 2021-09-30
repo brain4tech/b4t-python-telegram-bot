@@ -1,5 +1,8 @@
 --- Brain4Tech Python Telegram Bot - Changelog ---
 
+Version 1.2.2 (30.09.2021)
+- revoked "better" kicking from groups and channels (how ironic)
+
 Version 1.2.1 (29.09.2021)
 - might have removed to many .json()s -.-
 

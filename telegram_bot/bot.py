@@ -236,7 +236,10 @@ class TelegramBot:
         return requests.post(self.__base_url + "/unbanChatMember", data=data)
     
     def kickChatMember (self, chat_id, user_id):
-        return self.unbanChatMember(chat_id, user_id, False)
+        response_ban = self.banChatMember(chat_id, user_id)
+        response_unban = self.unbanChatMember(chat_id, user_id, True)
+
+        return response_ban, response_unban
     
     def getChatMember (self, chat_id, user_id):
         data = {

@@ -33,7 +33,8 @@ class TelegramBot:
         if not response['ok']:
             raise ValueError(f"Passed token not accepted by Telegram. Please check and try again: {response['description']}")
 
-    def poll(self):
+    def poll(self, one_time = False):
+
         while True:
             try:
                 update = requests.get(self.__base_url + "/getUpdates", data={'offset': self.__offset}).json()
@@ -66,6 +67,9 @@ class TelegramBot:
 
             except Exception as e:
                 print(f"An error occurred: {repr(e)}")
+
+            if one_time:
+                return result, update
 
     def sendMessage(self, chat_id, message, keyboard: dict = None):
 

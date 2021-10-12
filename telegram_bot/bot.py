@@ -71,34 +71,37 @@ class TelegramBot:
             if one_time:
                 return result, update
 
-    def sendMessage(self, chat_id, message, keyboard: dict = None):
+    def sendMessage(self, chat_id, message, keyboard: dict = None, silent = False):
 
         data = {
             'chat_id': chat_id,
             'text': message,
+            'disable_notification': bool(silent),
             'reply_markup': json.dumps(keyboard) if keyboard else ""
         }
 
         return requests.post(self.__base_url + "/sendMessage", data=data)
 
-    def sendPhoto(self, chat_id, photo_path, caption=""):
+    def sendPhoto(self, chat_id, photo_path, caption="", silent = False):
 
         data = {
             'chat_id': chat_id,
-            'caption': caption
+            'caption': caption,
+            'disable_notification': bool(silent)
         }
 
         photo = {'photo': open(photo_path, 'rb')}
 
         return requests.post(self.__base_url + "/sendPhoto", data=data, files=photo)
 
-    def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path=""):
+    def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", silent = False):
         data = {
             'chat_id': chat_id,
             'caption': caption,
             'duration': duration if duration else None,
             'width': width if width else None,
-            'height': height if height else None
+            'height': height if height else None,
+            'disable_notification': bool(silent)
         }
 
         media = {'photo': open(video_path, 'rb')}
@@ -108,13 +111,14 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendVideo", data=data, files=media)
 
-    def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path=""):
+    def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path="", silent = False):
         data = {
             'chat_id': chat_id,
             'caption': caption,
             'length': length if length else None,
             'performer': performer,
             'title': title,
+            'disable_notification': bool(silent)
         }
 
         media = {'photo': open(audio_path, 'rb')}
@@ -124,10 +128,11 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendAudio", data=data, files=media)
 
-    def sendDocument(self, chat_id, document_path, caption="", thumbnail_path=""):
+    def sendDocument(self, chat_id, document_path, caption="", thumbnail_path="", silent = False):
         data = {
             'chat_id': chat_id,
-            'caption': caption
+            'caption': caption,
+            'disable_notification': bool(silent)
         }
 
         media = {'photo': open(document_path, 'rb')}

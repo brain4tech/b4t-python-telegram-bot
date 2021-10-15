@@ -7,6 +7,7 @@ __version__ = "1.0.0"
 from .bot import TelegramBot
 from .buttons import KeyboardButton, InlineButton, ButtonList
 from .chatmembers import ChatMember
+from .chatpermissions import ChatPermissions
 from .commands import BotCommand, BotCommandList
 from .media import Photo, Video, Audio, Document
 from .messages import Message, ChannelPost, MessageEntity, MessageEntityList, User, Chat

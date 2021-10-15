@@ -4,6 +4,7 @@
 from .updates import Update
 from .commands import BotCommandList
 from .chatmembers import ChatMember
+from .chatpermissions import ChatPermissions
 
 import json
 import requests
@@ -279,4 +280,17 @@ class TelegramBot:
                 return [ChatMember(member) for member in response['result']]
         except Exception:
             return None
+    
+    def restrictChatMember (self, chat_id, user_id, permissions: ChatPermissions):
+        if not isinstance(permissions, ChatPermissions):
+            raise ValueError(f"passed parameter 'permissions' must be type {type(ChatPermissions)}, not {type(permissions)}")
+        
+        data = {
+            'chat_id': chat_id,
+            'user_id': user_id,
+            'permissions': json.dumps(permissions.toDict())
+        }
+
+        return requests.post(self.__base_url + "/restrictChatMember", data=data)
+
 

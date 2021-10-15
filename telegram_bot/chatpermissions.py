@@ -15,4 +15,4 @@ class ChatPermissions:
 
 if __name__ == '__main__':
     test = ChatPermissions(True, False, True, False, True, True, False, False)
-    print (test.toJSON())
+    print (test.toDict())

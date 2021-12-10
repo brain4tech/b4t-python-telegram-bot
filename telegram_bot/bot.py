@@ -32,6 +32,8 @@ class TelegramBot:
 
         response = requests.get(self.__base_url + "/getMe").json()
         if not response['ok']:
+            # TODO get own id so bot cannot ban or restrict itself
+
             raise ValueError(f"Passed token not accepted by Telegram. Please check and try again: {response['description']}")
 
     def poll(self, one_time = False):
@@ -105,7 +107,7 @@ class TelegramBot:
             'disable_notification': bool(silent)
         }
 
-        media = {'photo': open(video_path, 'rb')}
+        media = {'video': open(video_path, 'rb')}
 
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
@@ -122,7 +124,7 @@ class TelegramBot:
             'disable_notification': bool(silent)
         }
 
-        media = {'photo': open(audio_path, 'rb')}
+        media = {'audio': open(audio_path, 'rb')}
 
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
@@ -136,7 +138,7 @@ class TelegramBot:
             'disable_notification': bool(silent)
         }
 
-        media = {'photo': open(document_path, 'rb')}
+        media = {'document': open(document_path, 'rb')}
 
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')

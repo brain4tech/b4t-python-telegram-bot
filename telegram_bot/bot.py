@@ -74,37 +74,40 @@ class TelegramBot:
             if one_time:
                 return result, update
 
-    def sendMessage(self, chat_id, message, keyboard: dict = None, silent = False):
+    def sendMessage(self, chat_id, message, keyboard: dict = None, markdown_style = False, silent = False):
 
         data = {
             'chat_id': chat_id,
             'text': message,
             'disable_notification': bool(silent),
-            'reply_markup': json.dumps(keyboard) if keyboard else ""
+            'reply_markup': json.dumps(keyboard) if keyboard else "",
+            'parse_mode': "MarkdownV2" if markdown_style else ""
         }
 
         return requests.post(self.__base_url + "/sendMessage", data=data)
 
-    def sendPhoto(self, chat_id, photo_path, caption="", silent = False):
+    def sendPhoto(self, chat_id, photo_path, caption="", markdown_style = False, silent = False):
 
         data = {
             'chat_id': chat_id,
             'caption': caption,
-            'disable_notification': bool(silent)
+            'disable_notification': bool(silent),
+            'parse_mode': "MarkdownV2" if markdown_style else None
         }
 
         photo = {'photo': open(photo_path, 'rb')}
 
         return requests.post(self.__base_url + "/sendPhoto", data=data, files=photo)
 
-    def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", silent = False):
+    def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", markdown_style = False, silent = False):
         data = {
             'chat_id': chat_id,
             'caption': caption,
             'duration': duration if duration else None,
             'width': width if width else None,
             'height': height if height else None,
-            'disable_notification': bool(silent)
+            'disable_notification': bool(silent),
+            'parse_mode': "MarkdownV2" if markdown_style else ""
         }
 
         media = {'video': open(video_path, 'rb')}
@@ -114,14 +117,15 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendVideo", data=data, files=media)
 
-    def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path="", silent = False):
+    def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path="", markdown_style = False, silent = False):
         data = {
             'chat_id': chat_id,
             'caption': caption,
             'length': length if length else None,
             'performer': performer,
             'title': title,
-            'disable_notification': bool(silent)
+            'disable_notification': bool(silent),
+            'parse_mode': "MarkdownV2" if markdown_style else ""
         }
 
         media = {'audio': open(audio_path, 'rb')}
@@ -131,11 +135,12 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendAudio", data=data, files=media)
 
-    def sendDocument(self, chat_id, document_path, caption="", thumbnail_path="", silent = False):
+    def sendDocument(self, chat_id, document_path, caption="", thumbnail_path="", markdown_style = False, silent = False):
         data = {
             'chat_id': chat_id,
             'caption': caption,
-            'disable_notification': bool(silent)
+            'disable_notification': bool(silent),
+            'parse_mode': "MarkdownV2" if markdown_style else ""
         }
 
         media = {'document': open(document_path, 'rb')}
@@ -173,7 +178,7 @@ class TelegramBot:
     def increaseOffset(self):
         self.__offset += 1
 
-    def editMessage(self, chat_id, message_id, text, keyboard: dict = None):
+    def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 
         # you can only edit messages which do not have a reply-keyboard
 
@@ -181,7 +186,8 @@ class TelegramBot:
             'chat_id': chat_id,
             'message_id': message_id,
             'text': text,
-            'reply_markup': json.dumps(keyboard) if keyboard else ""
+            'reply_markup': json.dumps(keyboard) if keyboard else "",
+            'parse_mode': "MarkdownV2" if markdown_style else ""
         }
     
         return requests.post(self.__base_url + "/editMessageText", data=data)

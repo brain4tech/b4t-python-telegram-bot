@@ -9,6 +9,7 @@ class Message:
         self.sender = User(data_['from'])
         self.chat = Chat(data_['chat'])
         self.date = data_['date']
+        self.reply_to_message = Message (data_['reply_to_message']) if 'reply_to_message' in data_ else None
         self.text = data_['text'] if 'text' in data_ else None
         self.entities = MessageEntityList(
             data_['entities']) if 'entities' in data_ else None

@@ -21,6 +21,9 @@ class Update:
 
     def isMessage(self):
         return True if self.message else False
+    
+    def isReplyToMessage(self):
+        return True if self.message.reply_to_message else False
 
     def isChannelPost(self):
         return True if self.channel_post else False

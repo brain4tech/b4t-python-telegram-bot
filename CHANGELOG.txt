@@ -1,5 +1,13 @@
 --- Brain4Tech Python Telegram Bot - Changelog ---
 
+Version 1.3.0 ()
+- new parameter for poll(): one_time polls for only one time if set to true
+- messages can be sent silently (no notification sound, notification will still pop up)
+- restrict chat members with restrictChatMember. Needs chat id, user id and instance of ChatPermissions
+- added reply-data to Message-class (bot-replying is in development)
+- sending audio, video and documents now works (shame on me, how could I miss that?)
+- add support for MarkdownV2-formatting
+
 Version 1.2.2 (30.09.2021)
 - revoked "better" kicking from groups and channels (how ironic)
 
@@ -22,7 +30,7 @@ Version 1.1.1 (22.09.2021)
 - fix for pypi
 
 Version 1.1.0 (22.09.2021)
-- new bot-mode: return_on_update_only (whether poll() should only return a value when there is a update or after every request)
+- new bot-mode: return_on_update_only (whether poll() should only return a value when there is an update or after every request)
 - ban, unban or kick members from any group-like chat (bot must be administrator)
 - get all administrators from a group-like chat
 - most methods now return the response of it's requests.post()s as a dictionary (see bot.py)

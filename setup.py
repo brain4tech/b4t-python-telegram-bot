@@ -13,11 +13,11 @@ classifiers = [
 
 setup(
     name='b4t-python-telegram-bot',
-    version='1.2.2',
+    version='1.3.0',
     description='Simple and lightweight Telegram Bot',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/brain4tech\b4t-python-telegram-bot",
+    url="https://github.com/brain4tech/b4t-python-telegram-bot",
     author='Brain4Tech',
     author_email='brain4techyt@gmail.com',
     license='MIT',

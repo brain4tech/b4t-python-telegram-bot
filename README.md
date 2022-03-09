@@ -12,8 +12,8 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Currently supported:**
 
- - sending and receiving messages, images, audio, video and documents
- - polls
+ - sending and receiving messages, images, audio, video and documents (silently)
+ - polls (single time or until valid update)
  - inline- and keyboardbuttons
  - callback-queries
  - bot-commands
@@ -21,8 +21,10 @@ Installation with pip: `pip install b4t-python-telegram-bot`
  - "return-on-update-only mode": bot only returns a value when it receives a valid update
  - new chat members
  - ban, unban or kick members from group-like chats
+ - restrict members in group-like chats
  - get information about chat members
  - edit messages
+ - MarkdownV2-formatting
 
 
 **Future plans:**
@@ -31,8 +33,10 @@ Installation with pip: `pip install b4t-python-telegram-bot`
  - add more media and interactable features (like voice, dices, media groups, locations and contacts)
  - get chat information and set chat attributes (like chat photo and description)
  - forward messages
+ - reply to messages
  - improve "single-chat mode"
  - add time delay between requests and use timeout features
+ - improve Markdown formatting support
  - documentation
 
 
@@ -72,8 +76,8 @@ Check the Update-class in telegram_bot/updates.py for more. It's pretty self exp
 
 **About Me:**
 
- - software-engineering student from Germany (3rd semester)
- - 2-3 years of Python experience
+ - software-engineering student from Germany (4th semester)
+ - 3-4 years of Python experience
  - I've been studying the Telegram Bot API for 1 1/2 years and released small scripts in [my other repository](https://github.com/brain4tech/telegram-bot-api-scripts). Unfortunately that coding style is unusable for bigger projects so I decided to create an own little library for future projects and other people who want to learn the Telegram Bot API without going through the pain I've been going through.
  - beginner at GitHub and publishing code.
  - English is obviously **not** my first language

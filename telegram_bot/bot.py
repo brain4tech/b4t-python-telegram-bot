@@ -65,14 +65,14 @@ class TelegramBot:
                     else:
                         return result, update
                 
+                if one_time:
+                    return result, update
+                
                 elif not self.__return_on_update_only:
                     return result, update
 
             except Exception as e:
                 print(f"An error occurred: {repr(e)}")
-
-            if one_time:
-                return result, update
 
     def sendMessage(self, chat_id, message, keyboard: dict = None, markdown_style = False, silent = False):
 

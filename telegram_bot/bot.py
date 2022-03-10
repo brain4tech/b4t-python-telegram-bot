@@ -189,6 +189,20 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendDice", data=data)
 
+    def sendContact(self, chat_id, phone_number, first_name, last_name = "", vcard = "", silent = False):
+
+        data = {
+            'chat_id': chat_id,
+            'phone_number': phone_number,
+            'first_name': first_name,
+            'last_name': last_name,
+            'vcard': vcard,
+            'disable_notification': bool(silent),
+        }
+
+        return requests.post(self.__base_url + "/sendContact", data=data)
+
+
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 
         # you can only edit messages which do not have a reply-keyboard

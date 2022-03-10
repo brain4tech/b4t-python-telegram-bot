@@ -3,6 +3,7 @@
 from .media import Photo, Video, Audio, Document
 # from .polls import Poll
 from .dice import Dice
+from .contact import Contact
 
 
 class Message:
@@ -24,6 +25,7 @@ class Message:
         self.new_chat_members = [User(user) for user in data_[
             'new_chat_members']] if 'new_chat_members' in data_ else None
         self.dice = Dice(data_['dice']) if 'dice' in data_ else None
+        self.contact = Contact(data_['contact']) if 'contact' in data_ else None
 
         # TODO fix circular import with Poll (which imports User)
         # self.poll = Poll(data_['poll']) if 'poll' in data_ else None

@@ -28,18 +28,15 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Future plans:**
 
- - download images, audio, video and documents
- - add more media and interactable features (like voice, media groups and chat actions)
- - extend location to support live locations
+ - add more media and interactive features (chat actions, animations and media groups)
  - return proper values for send* - methods (eg. sendDice should return a Dice, not only response object)
- - get chat information and set chat attributes (like chat photo and description)
- - forward messages
- - reply to messages
- - improve "single-chat mode"
- - add time delay between requests and use timeout features
+ - forward messages & reply to messages
+ - get chat-information and set chat-attributes (like photo and description)
+ - download images, audio, video and documents
  - improve Markdown formatting support
+ - add time delay between requests and use timeout features
  - documentation
-
+ 
 
 **How it works:**
 

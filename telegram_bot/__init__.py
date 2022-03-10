@@ -16,3 +16,4 @@ from .polls import Poll, PollOption, PollAnswer
 from .updates import Update
 from .dice import Dice
 from .contact import Contact
+from .location import Location, Venue

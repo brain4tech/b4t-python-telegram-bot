@@ -201,7 +201,30 @@ class TelegramBot:
         }
 
         return requests.post(self.__base_url + "/sendContact", data=data)
+    
+    def sendLocation(self, chat_id, latitude, longitude, silent = False):
 
+        data = {
+            'chat_id': chat_id,
+            'latitude': latitude,
+            'longitude': longitude,
+            'disable_notification': bool(silent),
+        }
+
+        return requests.post(self.__base_url + "/sendLocation", data=data)
+
+    def sendVenue(self, chat_id, latitude, longitude, title, address = 0, silent = False):
+
+        data = {
+            'chat_id': chat_id,
+            'latitude': latitude,
+            'longitude': longitude,
+            'title': title,
+            'address': address,
+            'disable_notification': bool(silent),
+        }
+
+        return requests.post(self.__base_url + "/sendVenue", data=data)
 
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 

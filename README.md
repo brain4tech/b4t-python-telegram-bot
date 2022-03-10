@@ -13,7 +13,7 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 **Currently supported:**
 
  - sending and receiving messages, images, audio, video and documents (silently)
- - polls and dices
+ - polls, dices and contacts
  - inline- and keyboardbuttons
  - callback-queries
  - bot-commands
@@ -30,7 +30,7 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 **Future plans:**
 
  - download images, audio, video and documents
- - add more media and interactable features (like voice, media groups, locations and contacts, chat actions)
+ - add more media and interactable features (like voice, media groups, locations and chat actions)
  - return proper values for send* - methods (sendDice should return a Dice, not only response object)
  - get chat information and set chat attributes (like chat photo and description)
  - forward messages

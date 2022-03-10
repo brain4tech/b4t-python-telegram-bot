@@ -14,3 +14,4 @@ from .messages import Message, ChannelPost, MessageEntity, MessageEntityList, Us
 from .misc import CallbackQuery
 from .polls import Poll, PollOption, PollAnswer
 from .updates import Update
+from .dice import Dice

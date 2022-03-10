@@ -5,6 +5,7 @@ from .updates import Update
 from .commands import BotCommandList
 from .chatmembers import ChatMember
 from .chatpermissions import ChatPermissions
+from .dice import Dice
 
 import json
 import requests
@@ -73,6 +74,13 @@ class TelegramBot:
 
             except Exception as e:
                 print(f"An error occurred: {repr(e)}")
+    
+    def __setOffset(self, offset: int):
+        self.__offset = offset
+
+    # USE WITH CAUTION!
+    def increaseOffset(self):
+        self.__offset += 1
 
     def sendMessage(self, chat_id, message, keyboard: dict = None, markdown_style = False, silent = False):
 
@@ -170,13 +178,16 @@ class TelegramBot:
             data['open_period'] = open_period
 
         return requests.post(self.__base_url + "/sendPoll", data=data)
+    
+    def sendDice(self, chat_id, emoji = Dice.DICE, silent = False):
+        
+        data = {
+            'chat_id': chat_id,
+            'emoji': emoji,
+            'disable_notification': bool(silent),
+        }
 
-    def __setOffset(self, offset: int):
-        self.__offset = offset
-
-    # USE WITH CAUTION!
-    def increaseOffset(self):
-        self.__offset += 1
+        return requests.post(self.__base_url + "/sendDice", data=data)
 
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 

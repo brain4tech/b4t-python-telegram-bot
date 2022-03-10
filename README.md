@@ -5,15 +5,14 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Requirements:**
 
-1. the latest [Python](https://www.python.org/downloads/) version with following libraries:
-	 - [requests](https://pypi.org/project/requests/) (`pip install requests`)
+1. the latest [Python](https://www.python.org/downloads/) version
 2. a bot token from [BotFather](https://core.telegram.org/bots#6-botfather)
 
 
 **Currently supported:**
 
  - sending and receiving messages, images, audio, video and documents (silently)
- - polls, dices and contacts
+ - polls, dices, contacts, locations and venues
  - inline- and keyboardbuttons
  - callback-queries
  - bot-commands
@@ -30,8 +29,9 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 **Future plans:**
 
  - download images, audio, video and documents
- - add more media and interactable features (like voice, media groups, locations and chat actions)
- - return proper values for send* - methods (sendDice should return a Dice, not only response object)
+ - add more media and interactable features (like voice, media groups and chat actions)
+ - extend location to support live locations
+ - return proper values for send* - methods (eg. sendDice should return a Dice, not only response object)
  - get chat information and set chat attributes (like chat photo and description)
  - forward messages
  - reply to messages

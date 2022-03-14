@@ -11,11 +11,11 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Currently supported:**
 
- - sending and receiving messages, images, audio, video and documents (silently)
+ - send and receive messages, images, audio, video animations and documents (silently)
  - polls, dices, contacts, locations and venues
  - chat actions
- - inline- and keyboardbuttons
- - callback-queries
+ - inlinebuttons and callback-queries
+ - keyboardbuttons
  - bot-commands
  - "single-chat mode": bot is only active in one single chat/group/channel
  - "return-on-update-only mode": bot only returns a value when it receives a valid update
@@ -29,8 +29,8 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Future plans:**
 
- - add more media and interactive features (animations and media groups)
- - return proper values for send* - methods (eg. sendDice should return a Dice, not only response object)
+ - add more media and interactive features (media groups)
+ - return proper values for send* - methods (eg. sendDice should return a Dice, not only requests.response object)
  - forward messages & reply to messages
  - get chat-information and set chat-attributes (like photo and description)
  - download images, audio, video and documents

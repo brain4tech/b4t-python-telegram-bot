@@ -1,6 +1,6 @@
 # classes for messages in updates
 
-from .media import Photo, Video, Audio, Document
+from .media import PhotoSize, Video, Animation, Audio, Document
 # from .polls import Poll
 from .dice import Dice
 from .contact import Contact
@@ -17,9 +17,10 @@ class Message:
         self.text = data_['text'] if 'text' in data_ else None
         self.entities = MessageEntityList(
             data_['entities']) if 'entities' in data_ else None
-        self.photo = [Photo(photo) for photo in data_[
+        self.photo = [PhotoSize(photo) for photo in data_[
             'photo']] if 'photo' in data_ else None
         self.video = Video(data_['video']) if 'video' in data_ else None
+        self.animation = Animation(data_['animation'] if 'animation' in data_ else None)
         self.audio = Audio(data_['audio']) if 'audio' in data_ else None
         self.document = Document(
             data_['document']) if 'document' in data_ else None

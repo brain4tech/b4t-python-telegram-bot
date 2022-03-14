@@ -125,6 +125,25 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendVideo", data=data, files=media)
 
+    def sendAnimation(self, chat_id, animation_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", markdown_style = False, silent = False):
+        data = {
+            'chat_id': chat_id,
+            'caption': caption,
+            'duration': duration if duration else None,
+            'width': width if width else None,
+            'height': height if height else None,
+            'disable_notification': bool(silent),
+            'parse_mode': "MarkdownV2" if markdown_style else ""
+        }
+
+        media = {'animation': open(animation_path, 'rb')}
+
+        if thumbnail_path:
+            media['thumb'] = open(thumbnail_path, 'rb')
+
+        return requests.post(self.__base_url + "/sendAnimation", data=data, files=media)
+
+
     def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path="", markdown_style = False, silent = False):
         data = {
             'chat_id': chat_id,

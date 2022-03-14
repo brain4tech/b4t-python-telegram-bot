@@ -39,6 +39,12 @@ class Update:
             return True if self.message.video else False
         except Exception:
             return False
+    
+    def isAnimation(self):
+        try:
+            return True if self.message.animation else False
+        except Exception:
+            return False
 
     def isAudio(self):
         try:

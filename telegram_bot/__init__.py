@@ -9,7 +9,7 @@ from .buttons import KeyboardButton, InlineButton, ButtonList
 from .chatmembers import ChatMember
 from .chatpermissions import ChatPermissions
 from .commands import BotCommand, BotCommandList
-from .media import Photo, Video, Audio, Document
+from .media import PhotoSize, Video, Animation, Audio, Document
 from .messages import Message, ChannelPost, MessageEntity, MessageEntityList, User, Chat
 from .misc import CallbackQuery
 from .polls import Poll, PollOption, PollAnswer

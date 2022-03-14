@@ -225,6 +225,14 @@ class TelegramBot:
         }
 
         return requests.post(self.__base_url + "/sendVenue", data=data)
+    
+    def sendChatAction(self, chat_id, chat_action):
+        data = {
+            'chat_id': chat_id,
+            'action': chat_action
+        }
+
+        return requests.post(self.__base_url + "/sendChatAction", data=data)
 
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 

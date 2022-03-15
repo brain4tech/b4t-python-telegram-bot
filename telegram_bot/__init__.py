@@ -1,7 +1,7 @@
 # __init__.py
 
 # version of package
-__version__ = "1.0.0"
+__version__ = "1.4.0"
 
 # importing all classes
 from .bot import TelegramBot

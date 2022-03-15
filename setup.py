@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import telegram_bot
 
 with open("README.md", "r", encoding="utf-8") as file:
     long_description = file.read()
@@ -13,7 +14,7 @@ classifiers = [
 
 setup(
     name='b4t-python-telegram-bot',
-    version='1.3.0',
+    version=str(telegram_bot.__version__),
     description='Simple and lightweight Telegram Bot',
     long_description=long_description,
     long_description_content_type="text/markdown",

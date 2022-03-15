@@ -260,10 +260,9 @@ class TelegramBot:
         
         data = {
             'chat_id': chat_id,
-            'media': media_data,
+            'media': json.dumps(media_data),
             'disable_notification': bool(silent)
         }
-
         return requests.post(self.__base_url + "/sendMediaGroup", data=data, files=media_media)
 
 

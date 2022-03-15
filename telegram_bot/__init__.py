@@ -18,3 +18,4 @@ from .dice import Dice
 from .contact import Contact
 from .location import Location, Venue
 from .chataction import ChatAction
+from .inputmedia import InputMedia, InputMediaPhoto, InputMediaVideo, InputMediaAnimation, InputMediaAudio, InputMediaDocument

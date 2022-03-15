@@ -20,7 +20,7 @@ class Message:
         self.photo = [PhotoSize(photo) for photo in data_[
             'photo']] if 'photo' in data_ else None
         self.video = Video(data_['video']) if 'video' in data_ else None
-        self.animation = Animation(data_['animation'] if 'animation' in data_ else None)
+        self.animation = Animation(data_['animation']) if 'animation' in data_ else None
         self.audio = Audio(data_['audio']) if 'audio' in data_ else None
         self.document = Document(
             data_['document']) if 'document' in data_ else None

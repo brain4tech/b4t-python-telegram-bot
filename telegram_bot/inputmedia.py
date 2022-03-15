@@ -9,15 +9,15 @@ class InputMedia:
 
     def toDict(self):
         data = {
-            'type': type,
+            'type': self.type,
             'media': f'attach://{self.media_path}',
-            'thumb': f'attach://{self.thumb_path}' if self.thumb_path else None,
-            'caption': self.caption if self.caption else None
+            'thumb': f'attach://{self.thumb_path}' if self.thumb_path else '',
+            'caption': self.caption if self.caption else ''
         }
 
-        media = {f'attach://{self.media_path}': open(self.media_path, 'rb')}
+        media = {f'{self.media_path}': open(self.media_path, 'rb')}
         if self.thumb_path:
-            media[f'attach://{self.thumb_path}'] = open(self.thumb_path, 'rb')
+            media[f'{self.thumb_path}'] = open(self.thumb_path, 'rb')
         
         return data, media
 

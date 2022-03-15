@@ -6,6 +6,7 @@ from .commands import BotCommandList
 from .chatmembers import ChatMember
 from .chatpermissions import ChatPermissions
 from .dice import Dice
+from .inputmedia import InputMediaList
 
 import json
 import requests
@@ -245,13 +246,26 @@ class TelegramBot:
 
         return requests.post(self.__base_url + "/sendVenue", data=data)
     
-    def sendChatAction(self, chat_id, chat_action):
+    def sendChatAction(self, chat_id, chat_action, silent = False):
         data = {
             'chat_id': chat_id,
-            'action': chat_action
+            'action': chat_action,
+            'disable_notification': bool(silent)
         }
 
         return requests.post(self.__base_url + "/sendChatAction", data=data)
+
+    def sendMediaGroup(self, chat_id, media: InputMediaList, silent = False):
+        media_data, media_media = media.toDict()
+        
+        data = {
+            'chat_id': chat_id,
+            'media': media_data,
+            'disable_notification': bool(silent)
+        }
+
+        return requests.post(self.__base_url + "/sendMediaGroup", data=data, files=media_media)
+
 
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 

@@ -29,13 +29,12 @@ Installation with pip: `pip install b4t-python-telegram-bot`
 
 **Future plans:**
 
- - return proper values for send* - methods (eg. sendDice should return a Dice, not only requests.response object)
  - forward messages & reply to messages
  - get chat-information and set chat-attributes (like photo and description)
  - download images, audio, video and documents
  - improve Markdown formatting support
  - add time delay between requests and use timeout features
- - documentation
+ - **documentation**
  
 
 **How it works:**
@@ -76,9 +75,9 @@ Check the Update-class in telegram_bot/updates.py for more. It's pretty self exp
 
  - software-engineering student from Germany (4th semester)
  - 3-4 years of Python experience
- - I've been studying the Telegram Bot API for 1 1/2 years and released small scripts in [my other repository](https://github.com/brain4tech/telegram-bot-api-scripts). Unfortunately that coding style is unusable for bigger projects so I decided to create an own little library for future projects and other people who want to learn the Telegram Bot API without going through the pain I've been going through.
+ - I've been studying the Telegram Bot API for 2 years and released small scripts in [my other repository](https://github.com/brain4tech/telegram-bot-api-scripts). Unfortunately that coding style is unusable for bigger projects so I decided to create an own little library for future projects and other people who want to learn the Telegram Bot API so they don't need to go through the pain I've been going through.
  - beginner at GitHub and publishing code.
  - English is obviously **not** my first language
 
 
-Feel free to make a pull request and help me making this repository beginner- and userfriendly!
+Feel free to make a pull request and help me making this repository more beginner- and userfriendly!

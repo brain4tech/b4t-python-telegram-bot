@@ -2,7 +2,8 @@
 # https://core.telegram.org/bots/api
 
 from .updates import Update
-from .commands import BotCommandList
+from .response import TelegramResponse
+from .commands import BotCommand, BotCommandList
 from .chatmembers import ChatMember
 from .chatpermissions import ChatPermissions
 from .dice import Dice
@@ -93,7 +94,8 @@ class TelegramBot:
             'parse_mode': "MarkdownV2" if markdown_style else ""
         }
 
-        return requests.post(self.__base_url + "/sendMessage", data=data)
+        response_raw = requests.post(self.__base_url + "/sendMessage", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendPhoto(self, chat_id, photo_path, caption="", markdown_style = False, silent = False):
 
@@ -106,7 +108,9 @@ class TelegramBot:
 
         photo = {'photo': open(photo_path, 'rb')}
 
-        return requests.post(self.__base_url + "/sendPhoto", data=data, files=photo)
+        response_raw = requests.post(self.__base_url + "/sendPhoto", data=data, files=photo).json()
+        return TelegramResponse(response_raw), response_raw
+
 
     def sendVideo(self, chat_id, video_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", markdown_style = False, silent = False):
         data = {
@@ -124,7 +128,8 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendVideo", data=data, files=media)
+        response_raw = requests.post(self.__base_url + "/sendVideo", data=data, files=media).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendAnimation(self, chat_id, animation_path, caption="", duration: int = 0, width: int = 0, height: int = 0, thumbnail_path="", markdown_style = False, silent = False):
         data = {
@@ -142,7 +147,8 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendAnimation", data=data, files=media)
+        response_raw = requests.post(self.__base_url + "/sendAnimation", data=data, files=media).json()
+        return TelegramResponse(response_raw), response_raw
 
 
     def sendAudio(self, chat_id, audio_path, caption="", length: int = 0, performer: str = "", title: str = "", thumbnail_path="", markdown_style = False, silent = False):
@@ -161,7 +167,8 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendAudio", data=data, files=media)
+        response_raw = requests.post(self.__base_url + "/sendAudio", data=data, files=media).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendDocument(self, chat_id, document_path, caption="", thumbnail_path="", markdown_style = False, silent = False):
         data = {
@@ -176,7 +183,8 @@ class TelegramBot:
         if thumbnail_path:
             media['thumb'] = open(thumbnail_path, 'rb')
 
-        return requests.post(self.__base_url + "/sendDocument", data=data, files=media)
+        response_raw = requests.post(self.__base_url + "/sendDocument", data=data, files=media).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendPoll(self, chat_id: int, question: str, options: list, is_anonymous: bool = True, poll_type: str = "regular",
                  multiple_answers: bool = False, correct_option: int = 0, explanation: str = "", open_period: int = 0, close_date: int = None):
@@ -197,7 +205,8 @@ class TelegramBot:
         if open_period > 5:
             data['open_period'] = open_period
 
-        return requests.post(self.__base_url + "/sendPoll", data=data)
+        response_raw = requests.post(self.__base_url + "/sendPoll", data=data).json()
+        return TelegramResponse(response_raw), response_raw
     
     def sendDice(self, chat_id, emoji = Dice.DICE, silent = False):
         
@@ -207,7 +216,8 @@ class TelegramBot:
             'disable_notification': bool(silent),
         }
 
-        return requests.post(self.__base_url + "/sendDice", data=data)
+        response_raw = requests.post(self.__base_url + "/sendDice", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendContact(self, chat_id, phone_number, first_name, last_name = "", vcard = "", silent = False):
 
@@ -220,7 +230,8 @@ class TelegramBot:
             'disable_notification': bool(silent),
         }
 
-        return requests.post(self.__base_url + "/sendContact", data=data)
+        response_raw = requests.post(self.__base_url + "/sendContact", data=data).json()
+        return TelegramResponse(response_raw), response_raw
     
     def sendLocation(self, chat_id, latitude, longitude, silent = False):
 
@@ -231,7 +242,8 @@ class TelegramBot:
             'disable_notification': bool(silent),
         }
 
-        return requests.post(self.__base_url + "/sendLocation", data=data)
+        response_raw = requests.post(self.__base_url + "/sendLocation", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendVenue(self, chat_id, latitude, longitude, title, address = 0, silent = False):
 
@@ -244,7 +256,8 @@ class TelegramBot:
             'disable_notification': bool(silent),
         }
 
-        return requests.post(self.__base_url + "/sendVenue", data=data)
+        response_raw = requests.post(self.__base_url + "/sendVenue", data=data).json()
+        return TelegramResponse(response_raw), response_raw
     
     def sendChatAction(self, chat_id, chat_action, silent = False):
         data = {
@@ -253,7 +266,8 @@ class TelegramBot:
             'disable_notification': bool(silent)
         }
 
-        return requests.post(self.__base_url + "/sendChatAction", data=data)
+        response_raw = requests.post(self.__base_url + "/sendChatAction", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def sendMediaGroup(self, chat_id, media: InputMediaList, silent = False):
         media_data, media_media = media.toDict()
@@ -263,8 +277,9 @@ class TelegramBot:
             'media': json.dumps(media_data),
             'disable_notification': bool(silent)
         }
-        return requests.post(self.__base_url + "/sendMediaGroup", data=data, files=media_media)
 
+        response_raw = requests.post(self.__base_url + "/sendMediaGroup", data=data, files=media_media).json()
+        return TelegramResponse(response_raw), response_raw
 
     def editMessage(self, chat_id, message_id, text, keyboard: dict = None, markdown_style = False):
 
@@ -278,7 +293,8 @@ class TelegramBot:
             'parse_mode': "MarkdownV2" if markdown_style else ""
         }
     
-        return requests.post(self.__base_url + "/editMessageText", data=data)
+        response_raw = requests.post(self.__base_url + "/editMessageText", data=data).json()
+        return TelegramResponse(response_raw), response_raw
     
     def editMessageInlineKeyboard(self, chat_id, message_id, keyboard: dict):
 
@@ -290,7 +306,8 @@ class TelegramBot:
             'reply_markup': json.dumps(keyboard)
         }
 
-        return requests.post(self.__base_url + "/editMessageReplyMarkup", data=data)
+        response_raw = requests.post(self.__base_url + "/editMessageReplyMarkup", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def deleteMessage(self, chat_id, message_id):
         data = {
@@ -298,7 +315,8 @@ class TelegramBot:
             'message_id': message_id
         }
 
-        return requests.post(self.__base_url + "/deleteMessage", data=data)
+        response_raw = requests.post(self.__base_url + "/deleteMessage", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def answerCallbackQuery(self, query_id, text):
         data = {
@@ -306,23 +324,35 @@ class TelegramBot:
             'text': text
         }
 
-        return requests.post(self.__base_url + "/answerCallbackQuery", data=data)
+        response_raw = requests.post(self.__base_url + "/answerCallbackQuery", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def setBotCommands(self, command_list: BotCommandList):
         if isinstance(command_list, BotCommandList):
             data = {'commands': json.dumps(command_list.toDict())}
 
-            return requests.post(self.__base_url + "/setMyCommands", data=data)
+            response_raw = requests.post(self.__base_url + "/setMyCommands", data=data).json()
+            return TelegramResponse(response_raw), response_raw
         else:
             raise TypeError(f"command_list ist type {type(command_list)} and not BotCommmandList")
 
     def deleteBotCommands(self):
-        return requests.post(self.__base_url + "/deleteMyCommands")
+        response_raw = requests.post(self.__base_url + "/deleteMyCommands").json()
+        return TelegramResponse(response_raw), response_raw
 
     def getBotCommands(self):
-        return requests.get(self.__base_url + "/getMyCommands").json()
+        response_raw = requests.get(self.__base_url + "/getMyCommands").json()
+        response = TelegramResponse(response_raw, True)
 
-        # convert json to package-own command-classes?
+        if response.isError():
+            response.result = None
+        else:
+            command_list = []
+            for command in response.result:
+                command_list.append(BotCommand(command['command'], command['description']))
+            response.result = command_list
+
+        return response, response_raw
     
     def banChatMember(self, chat_id, user_id):
         data = {
@@ -330,7 +360,8 @@ class TelegramBot:
             'user_id': user_id
         }
 
-        return requests.post(self.__base_url + "/banChatMember", data=data)
+        response_raw = requests.post(self.__base_url + "/banChatMember", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
     def unbanChatMember(self, chat_id, user_id, only_if_banned = True):
         data = {
@@ -339,7 +370,8 @@ class TelegramBot:
             'only_if_banned': bool(only_if_banned)
         }
 
-        return requests.post(self.__base_url + "/unbanChatMember", data=data)
+        response_raw = requests.post(self.__base_url + "/unbanChatMember", data=data).json()
+        return TelegramResponse(response_raw), response_raw
     
     def kickChatMember (self, chat_id, user_id):
         response_ban = self.banChatMember(chat_id, user_id)
@@ -353,14 +385,15 @@ class TelegramBot:
             'user_id': user_id
         }
 
-        response = requests.post(self.__base_url + "/getChatMember", data=data).json()
-        try:
-            if response['ok'] and response['result']:
-                return ChatMember(response['result'])
-            else:
-                return None
-        except Exception:
-            return None
+        response_raw = requests.post(self.__base_url + "/getChatMember", data=data).json()
+        response = TelegramResponse(response_raw, True)
+
+        if response.isError():
+            response.result = None
+        else:
+            response.result = ChatMember(response.result)
+
+        return response, response_raw
 
     
     def getChatAdministrators(self, chat_id):
@@ -369,14 +402,16 @@ class TelegramBot:
             'chat_id': chat_id
         }
 
-        response = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
+        response_raw = requests.post(self.__base_url + "/getChatAdministrators", data=data).json()
+        response = TelegramResponse(response_raw, True)
 
-        try:
-            if response['ok'] and response['result']:
-                return [ChatMember(member) for member in response['result']]
-        except Exception:
-            return None
-    
+        if response.isError():
+            response.result = None
+        else:
+            response.result = [ChatMember(member) for member in response.result]
+
+        return response, response_raw
+
     def restrictChatMember (self, chat_id, user_id, permissions: ChatPermissions):
         if not isinstance(permissions, ChatPermissions):
             raise ValueError(f"passed parameter 'permissions' must be type {type(ChatPermissions)}, not {type(permissions)}")
@@ -387,6 +422,7 @@ class TelegramBot:
             'permissions': json.dumps(permissions.toDict())
         }
 
-        return requests.post(self.__base_url + "/restrictChatMember", data=data)
+        response_raw = requests.post(self.__base_url + "/restrictChatMember", data=data).json()
+        return TelegramResponse(response_raw), response_raw
 
 

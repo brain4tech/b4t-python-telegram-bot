@@ -19,3 +19,4 @@ from .contact import Contact
 from .location import Location, Venue
 from .chataction import ChatAction
 from .inputmedia import InputMedia, InputMediaPhoto, InputMediaVideo, InputMediaAnimation, InputMediaAudio, InputMediaDocument, InputMediaList
+from .response import TelegramResponse
